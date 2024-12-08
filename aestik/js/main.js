@@ -3,7 +3,7 @@
 // License and source code: https://github.com/Philipp4j/Aestik-Save-Editor
 
 // CONFIG
-var server = "https://lilyu.xyz:3000";
+var server = "https://yourdomain.com:3000";
 
 var lastFileName = "";
 document.getElementById("res").value = "";
