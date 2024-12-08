@@ -10,6 +10,10 @@
 - **Secure**: Uses SSL for secure communication between the frontend and backend.
 - **Drag and Drop**: Supports drag and drop for file uploads.
 
+## Live Demo
+
+You can try out the Aestik Save File Editor at [https://lilyu.xyz/aestik](https://lilyu.xyz/aestik). Please note that this is a live demo and may not always be available.
+
 ## Setup Instructions
 
 >The setup instructions assume you have a domain name and a linux server to run this project.

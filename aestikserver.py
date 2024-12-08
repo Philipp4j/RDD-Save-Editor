@@ -37,18 +37,6 @@ class AestikHandler(BaseHTTPRequestHandler):
 
         return encrypted_data
 
-    def xor_decrypt(self, data, keyword):
-        decrypted_data = bytearray()
-        key_len = len(keyword)
-        key_index = 0
-
-        for char in data:
-            decrypted_byte = char ^ ord(keyword[key_index % key_len])
-            decrypted_data.append(decrypted_byte)
-            key_index += 1
-
-        return decrypted_data
-
     def send_cors_headers(self):
         self.send_header('Access-Control-Allow-Origin', cors_origin)
         self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
@@ -79,7 +67,7 @@ class AestikHandler(BaseHTTPRequestHandler):
                     }
                 elif self.path == '/decrypt':
                     encrypted_data = bytearray(data)
-                    decrypted_data = self.xor_decrypt(encrypted_data, xorkey)
+                    decrypted_data = self.xor_encrypt(encrypted_data, xorkey)
                     response_data = {
                         'data': decrypted_data.decode('utf-8'),
                         'filename': 'decrypted.json'
