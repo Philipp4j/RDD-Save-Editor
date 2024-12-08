@@ -117,4 +117,4 @@ def run(server_class=HTTPServer, handler_class=AestikHandler, port=3000, certfil
     httpd.serve_forever()
 
 if __name__ == "__main__":
-    run(server_port)
+    run(port=server_port)

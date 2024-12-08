@@ -1,7 +1,7 @@
 # Aestik Save File Editor
 
 
-Aestik Save File Editor is a tool for encrypting and decrypting save files for the game Aestik. This project includes a simple backend server and a frontend interface to make editing save files easy and secure.
+>Aestik Save File Editor is a tool for encrypting and decrypting save files for the game Aestik. This project includes a simple backend server and a frontend interface to make editing save files easy and secure.
 
 ## Features
 
@@ -11,6 +11,8 @@ Aestik Save File Editor is a tool for encrypting and decrypting save files for t
 - **Drag and Drop**: Supports drag and drop for file uploads.
 
 ## Setup Instructions
+
+>The setup instructions assume you have a domain name and a linux server to run this project.
 
 ### Prerequisites
 
@@ -26,10 +28,11 @@ Aestik Save File Editor is a tool for encrypting and decrypting save files for t
     cd Aestik-Save-Editor
     ```
 
-2. **Install Dependencies**:
+2. **Ensure python 3 is installed**:
     ```sh
-    pip install -r requirements.txt
+    python3 --version
     ```
+    If python 3 is not installed, install it through your package manager.
 
 3. **Generate SSL Certificates**:
     Use Certbot to generate SSL certificates for your domain:
@@ -38,7 +41,10 @@ Aestik Save File Editor is a tool for encrypting and decrypting save files for t
     ```
     This will generate the certificates in `/etc/letsencrypt/live/yourdomain.com/`.
 
-4. **Configure the Server**:
+4. **Move the Certificates**:
+    Move the `cert.pem` and `privkey.pem` files to the same directory as the `aestikserver.py` file.
+
+5. **Configure the Server**:
     Edit the aestikserver.py file to set your domain and port:
     ```python
     # CONFIG
@@ -47,20 +53,28 @@ Aestik Save File Editor is a tool for encrypting and decrypting save files for t
     server_port = 3000
     ```
 
-5. **Run the Server**:
+6. **Run the Server**:
     ```sh
     python3 aestikserver.py
     ```
+    You can also use tmux to run the server in the background. This can be done by 
+    ```sh
+    tmux new -s aestik
+    cd /path/to/Aestik-Save-Editor
+    python3 aestikserver.py
+    ```
+    To detach from the tmux session, press `Ctrl + B` and then `D`.
+    To reattach to the tmux session, run `tmux attach -t aestik`.
 
 ### Frontend Setup
 
-This step varies depending on your currently used web server. Here is an example for apache2:
+>This step varies depending on your currently used web server. Here is an example for apache2:
 
 1. **Move the files**:
-    Move the aestik folder into your web server's root directory. For apache2, this is usually `/var/www/html/`.
+    Move the `aestik` folder into your web server's root directory. For apache2, this is usually `/var/www/html/`, meaning the `aestik` folder should be located at `/var/www/html/aestik`.
 
 2. **Configure the Server**:
-    Edit the `aestik/js/config.js` file to set your domain and port:
+    Edit the `aestik/js/main.js` file to set your domain and port:
     ```javascript
     const serverUrl = 'https://yourdomain.com:3000';
     ```
@@ -71,7 +85,7 @@ This step varies depending on your currently used web server. Here is an example
 
 ## Usage
 
-Remember to always make a backup of your save files before editing them, as there is always a risk of data loss when editing save files.
+>Remember to always make a backup of your save files before editing them, as there is always a risk of data loss when editing save files.
 
 1. **Upload a Save File**:
     Drag and drop your save file into the upload area, or click to select a file. Details about where to find the save file can be found by clicking the "How to use" button.
