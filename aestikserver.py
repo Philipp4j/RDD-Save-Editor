@@ -20,9 +20,9 @@ import ssl
 import json
 
 # CONFIG
-cors_origin = 'https://lilyu.xyz' # Change this to your domain, otherwise CORS will break the entire thing
-xorkey = "47373992"               # Change this to the current Aestik decryption key, no clue if that will ever change but it's here just in case
-server_port = 3000                # Change this to the port you want the server to run on, if you change it CHANGE IT IN THE FRONTEND TOO
+cors_origin = 'https://yourdomain.com' # Change this to your domain, otherwise CORS will break the entire thing
+xorkey = "47373992"                    # Change this to the current Aestik decryption key, no clue if that will ever change but it's here just in case
+server_port = 3000                     # Change this to the port you want the server to run on, if you change it CHANGE IT IN THE FRONTEND TOO
 
 class AestikHandler(BaseHTTPRequestHandler):
     def xor_encrypt(self, data, keyword):
