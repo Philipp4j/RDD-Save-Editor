@@ -1,13 +1,13 @@
 # Aestik Save File Editor
 
 
->Aestik Save File Editor is a tool for encrypting and decrypting save files for the game Aestik. This project includes a simple backend server and a frontend interface to make editing save files easy and secure.
+>Aestik Save File Editor is a tool for encrypting and decrypting save files for the game Aestik. This project includes a fully browser based implementation of the save file editor.
 
 ## Features
 
 - **Encrypt/Decrypt Save Files**: Easily encrypt and decrypt your Aestik save files.
 - **Edit Save Data**: Modify your save data directly in the browser.
-- **Secure**: Uses SSL for secure communication between the frontend and backend.
+- **Secure**: All encryption and decryption is done locally in the browser. Your save file is never sent to or stored anywhere else.
 - **Drag and Drop**: Supports drag and drop for file uploads.
 
 ## Live Demo
@@ -16,61 +16,13 @@ You can try out the Aestik Save File Editor at [https://lilyu.xyz/aestik](https:
 
 ## Setup Instructions
 
->The setup instructions assume you have a domain name and a linux server to run this project.
+>The setup instructions assume you have a domain name and a linux server to run this project. Running this project on a local machine is also possible, but the instructions will not cover that.
 
 ### Prerequisites
 
-- Python 3.x
-- Certbot (for generating SSL certificates)
-- A domain name (for SSL certificates)
+- **Web Server**: You will need a web server to host the save file editor. Apache2 is recommended, but other web servers should work as well. 
 
-### Backend Setup
-
-1. **Clone the Repository**:
-    ```sh
-    git clone https://github.com/Philipp4j/Aestik-Save-Editor.git
-    cd Aestik-Save-Editor
-    ```
-
-2. **Ensure python 3 is installed**:
-    ```sh
-    python3 --version
-    ```
-    If python 3 is not installed, install it through your package manager.
-
-3. **Generate SSL Certificates**:
-    Use Certbot to generate SSL certificates for your domain:
-    ```sh
-    sudo certbot certonly --standalone -d yourdomain.com
-    ```
-    This will generate the certificates in `/etc/letsencrypt/live/yourdomain.com/`.
-
-4. **Move the Certificates**:
-    Move the `cert.pem` and `privkey.pem` files to the same directory as the `aestikserver.py` file.
-
-5. **Configure the Server**:
-    Edit the aestikserver.py file to set your domain and port:
-    ```python
-    # CONFIG
-    cors_origin = 'https://yourdomain.com'
-    xorkey = "47373992"
-    server_port = 3000
-    ```
-
-6. **Run the Server**:
-    ```sh
-    python3 aestikserver.py
-    ```
-    You can also use tmux to run the server in the background. This can be done by 
-    ```sh
-    tmux new -s aestik
-    cd /path/to/Aestik-Save-Editor
-    python3 aestikserver.py
-    ```
-    To detach from the tmux session, press `Ctrl + B` and then `D`.
-    To reattach to the tmux session, run `tmux attach -t aestik`.
-
-### Frontend Setup
+### Setup
 
 >This step varies depending on your currently used web server. Here is an example for apache2:
 
@@ -78,11 +30,12 @@ You can try out the Aestik Save File Editor at [https://lilyu.xyz/aestik](https:
     Move the `aestik` folder into your web server's root directory. For apache2, this is usually `/var/www/html/`, meaning the `aestik` folder should be located at `/var/www/html/aestik`.
 
 2. **Configure the Server**:
-    Edit the `aestik/js/main.js` file to set your domain and port:
+    Edit the `aestik/js/main.js` file to set the current encryption key.
     ```javascript
-    const serverUrl = 'https://yourdomain.com:3000';
+    const key = "47373992";
     ```
-    Only change the port if you have changed the server port in the backend setup.
+    > [!NOTE]
+    > Only change the key if it has been changed by the developers of Aestik in any update. Otherwise, do not change the key.
 
 3. **Access the Site**:
     Open your browser and navigate to `https://yourdomain.com/aestik`. You should see the Aestik Save File Editor interface. 

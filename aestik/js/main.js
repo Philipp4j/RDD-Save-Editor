@@ -1,42 +1,50 @@
 // Author: lilyu_
 // https://lilyu.xyz
 // License and source code: https://github.com/Philipp4j/Aestik-Save-Editor
+// Date: 2024/12/28 (YYYY/MM/DD)
 
 // CONFIG
-var server = "https://yourdomain.com:3000";
-
-var lastFileName = "";
+const key = "47373992";
+let lastFileName = "";
 document.getElementById("res").value = "";
 
-function xorFile(mode, file) {
-    var reader = new FileReader();
-    var endpoint = mode === 0 ? server+'/decrypt' : server+'/encrypt';
+function xorProcess(data, keyword) {
+    const processedData = [];
+    const keyLen = keyword.length;
 
-    reader.onload = function(e) {
-        lastFileName = file.name.split('.').slice(0, -1).join('.');
-        var data = new Uint8Array(e.target.result);
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', endpoint, true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                var textArea = document.getElementById('res');
-                textArea.value = formatJSON(response.data);
-            }
-        };
-        xhr.send(JSON.stringify({data: Array.from(data)}));
+    for (let i = 0; i < data.length; i++) {
+        processedData.push(data[i] ^ keyword.charCodeAt(i % keyLen));
     }
-    try {
-        reader.readAsArrayBuffer(file);
-    } catch (e) {
-        alert("No file selected. Drag and drop a file or click the upload button.");
-    }
+
+    return processedData;
+}
+
+function xorFile(encrypt, file) {
+    const reader = new FileReader();
+    reader.onload = function() {
+        const data = new Uint8Array(reader.result);
+        const result = encrypt 
+            ? xorProcess(data, key) 
+            : xorProcess(data, key);
+
+        if (encrypt) {
+            const blob = new Blob([new Uint8Array(result)], { type: "application/octet-stream" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = lastFileName;
+            a.click();
+            URL.revokeObjectURL(url);
+        } else {
+            document.getElementById("res").value = formatJSON(String.fromCharCode(...result));
+        }
+    };
+    reader.readAsArrayBuffer(file);
 }
 
 function formatJSON(jsonString) {
     try {
-        var jsonObj = JSON.parse(jsonString);
+        const jsonObj = JSON.parse(jsonString);
         return JSON.stringify(jsonObj, null, 4);
     } catch (e) {
         console.error("Invalid JSON string", e);
@@ -46,81 +54,63 @@ function formatJSON(jsonString) {
 
 function minifyJSON(jsonString) {
     try {
-        var jsonObj = JSON.parse(jsonString);
+        const jsonObj = JSON.parse(jsonString);
         return JSON.stringify(jsonObj);
     } catch (e) {
         console.error("Invalid JSON string", e);
-        return jsonString; 
+        return jsonString;
     }
 }
 
-function decryptFile() {
-    var file = document.getElementById('file').files[0];
-    xorFile(0, file);
-}
-
-function encryptFile() {
-    var textArea = document.getElementById('res');
-    var content = minifyJSON(textArea.value);
-    var blob = new Blob([content], {type: 'application/json'});
-    var reader = new FileReader();
-    var endpoint = server+'/encrypt';
-
-    reader.onload = function(e) {
-        var data = new Uint8Array(e.target.result);
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', endpoint, true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                var blob = new Blob([new Uint8Array(response.data)], {type: 'application/octet-stream'});
-                var url = window.URL.createObjectURL(blob);
-                var a = document.createElement('a');
-                a.href = url;
-                a.download = lastFileName + '.json';
-                a.click();
-                window.URL.revokeObjectURL(url);
-            }
-        };
-        xhr.send(JSON.stringify({data: Array.from(data)}));
+function decryptSave() {
+    const file = document.getElementById('file').files[0];
+    if (file) {
+        lastFileName = file.name;
+        xorFile(0, file);
     }
-    reader.readAsArrayBuffer(blob);
 }
 
-function helpScreen() {
-    var help = document.getElementById('help-screen');
+function encryptSave() {
+    const textareaContent = document.getElementById('res').value;
+    const minifiedContent = minifyJSON(textareaContent);
+    const encryptedContent = xorProcess(new TextEncoder().encode(minifiedContent), key);
+    const blob = new Blob([new Uint8Array(encryptedContent)], { type: "application/octet-stream" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = lastFileName;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+function toggleHelpScreen() {
+    const help = document.getElementById('help-screen');
     help.style.display = help.style.display === 'block' ? 'none' : 'block';
-    var res = document.getElementById('res');
+    const res = document.getElementById('res');
     res.style.display = res.style.display === 'none' ? 'block' : 'none';
 }
 
-document.querySelector('.custom-file-upload').addEventListener('click', function() {
-    document.getElementById('file').click();
-});
-
-document.getElementById("load").addEventListener("click", decryptFile);
-document.getElementById("save").addEventListener("click", encryptFile);
-document.getElementById("help").addEventListener("click", helpScreen);
-
-document.addEventListener('dragover', function(event) {
+function preventDrag(event) {
     event.preventDefault();
     event.stopPropagation();
-    document.body.classList.add('dragging');
-});
+}
 
-document.addEventListener('dragleave', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    document.body.classList.remove('dragging');
+document.getElementById("file").addEventListener("change", decryptSave);
+document.getElementById("load").addEventListener("click", () => {
+    document.getElementById('file').click(); 
 });
+document.getElementById("save").addEventListener("click", encryptSave);
+document.getElementById("help").addEventListener("click", toggleHelpScreen);
 
-document.addEventListener('drop', function(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    document.body.classList.remove('dragging');
-    var file = event.dataTransfer.files[0];
+document.addEventListener('dragover', preventDrag);
+document.addEventListener('dragleave', preventDrag);
+document.addEventListener('drop', (event) => {
+    preventDrag(event);
+    const file = event.dataTransfer.files[0];
     if (file) {
+        lastFileName = file.name;
         xorFile(0, file);
     }
 });
+
+console.info("Aestik Save Editor loaded successfully");
