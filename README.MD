@@ -1,5 +1,9 @@
 # Aestik Save File Editor
 
+> [!WARNING]  
+> THIS IS A BACKUP OF THE OLD, WORSE VERSION WHICH IS BASED ON A PYTHON BACKEND!
+> FOR THE IMPROVED VERSION, PLEASE SEE THE MAIN BRANCH OF THIS REPO.
+> (However, this should still all work, its just worse in just about any way)
 
 >Aestik Save File Editor is a tool for encrypting and decrypting save files for the game Aestik. This project includes a simple backend server and a frontend interface to make editing save files easy and secure.
 
