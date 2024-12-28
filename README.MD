@@ -1,10 +1,5 @@
 # Aestik Save File Editor
 
-> [!WARNING]  
-> THIS IS A BACKUP OF THE OLD, WORSE VERSION WHICH IS BASED ON A PYTHON BACKEND!
-> FOR THE IMPROVED VERSION, PLEASE SEE THE MAIN BRANCH OF THIS REPO.
-> (However, this should still all work, its just worse in just about any way)
-
 >Aestik Save File Editor is a tool for encrypting and decrypting save files for the game Aestik. This project includes a fully browser based implementation of the save file editor.
 
 ## Features
@@ -73,3 +68,8 @@ This project is licensed under the Aestik Save File Editor License. See the `LIC
 ## Author
 
 Created by [lilyu_](https://lilyu.xyz). This project is not affiliated with Aestik or its developers in any way.
+
+
+> [!TIP]  
+> To find the old server-based version of this project, please refer to the `archive-server` branch.
+> It is not recommended to use, as it is worse in just about every way compared to the new version.
