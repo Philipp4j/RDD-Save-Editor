@@ -1,7 +1,7 @@
 // Author: lilyu_
 // https://lilyu.xyz
-// License and source code: https://github.com/Philipp4j/Aestik-Save-Editor
-// Date: 2024/12/28 (YYYY/MM/DD)
+// License and source code: https://github.com/Philipp4j/RDD-Save-Editor
+// Date: 2025/04/16 (YYYY/MM/DD)
 
 // CONFIG
 const key = "qpsodifguhjrkelx";
