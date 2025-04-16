@@ -20,12 +20,12 @@ body {
 }
 
 h1 {
-    color: #134955;
-    text-align: center;
+    color: #cc8439;
+    text-align: left;
 }
 
 button {
-    background-color: #134955;
+    background-color: #cc8439;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -36,7 +36,7 @@ button {
 }
 
 button:hover {
-    background-color: #0f3a44;
+    background-color: #ffa648;
 }
 
 textarea {
@@ -56,7 +56,7 @@ input[type="file"] {
 }
 
 .custom-file-upload {
-    background-color: #134955;
+    background-color: #cc8439;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -68,7 +68,7 @@ input[type="file"] {
 }
 
 .custom-file-upload:hover {
-    background-color: #0f3a44;
+    background-color: #ffa648;
 }
 
 body.dragging {

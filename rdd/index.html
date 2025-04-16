@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aestik Save Editor | lilyu.xyz</title>
+    <title>Roulette Dungeon Demo Save Editor | lilyu.xyz</title>
     <link rel="stylesheet" href="./css/main.css">
     <meta name="title" content="Aestik Save Editor | lilyu.xyz">
     <meta name="author" content="lilyu_">
@@ -12,38 +12,31 @@
 </head>
 <body>
     <div class="container">
-        <h1>Aestik Save Editor</h1>
+        <h1>Roulette Dungeon Demo Save Editor</h1>
         <div class="buttons">
             <label for="file" class="custom-file-upload">Choose File</label>
             <input type="file" id="file">
             <button id="load">Load</button>
-            <!-- <button id="format">Format JSON</button>
-            <button id="minify">Minify JSON</button> -->
             <button id="save">Save</button>
             <button id="help">How to use</button>
         </div>
         <div class="help-screen" id="help-screen">
             <h2>How to use</h2>
             <p>Before using the save editor, create a backup of your save file.</p>
-            <p>1. Open Steam and right click on Aestik in your library</p>
+            <p>1. Open Steam and right click on Roulette Dungeon Demo in your library</p>
             <p>2. Click on "Properties"</p>
             <p>3. Click on "Local Files" tab</p>
             <p>4. Click on "Browse Local Files"</p>
-            <p>5. Open the "Aestik_Data" folder</p>
-            <p>6. Find the save file for the save slot you use</p>
-            <ul>
-                <li>Slot 1: [ENCRYPTED]SAVE_FILE.json</li>
-                <li>Slot 2: [ENCRYPTED]SAVE_FILE_B.json</li>
-                <li>Slot 3: [ENCRYPTED]SAVE_FILE_C.json</li>
-            </ul>
+            <p>5. Open the "Roulette Dungeon_Data" folder</p>
+            <p>6. Find the save file (<code>savedData.json</code>)</p>
             <p>7. Drag and drop the save file into the editor</p>
             <p>8. Make whatever changes you desire</p>
             <p>9. Click on "Save" to download your modified save file</p>
             <p>10. Replace the original save file with the modified save file</p>            
         </div>
-        <textarea id="res"></textarea>
+        <textarea id="res" spellcheck="false"></textarea>
         <footer>
-            <p>Created by <a href="https://lilyu.xyz">lilyu_</a>. This project is not affiliated with Aestik or its developers in any way. <a href="https://github.com/Philipp4j/Aestik-Save-Editor">Source code (GitHub)</a></p>
+            <p>Created by <a href="https://lilyu.xyz">lilyu_</a>. This project is not affiliated with Roulette Dungeon or its developers in any way. <a href="https://github.com/Philipp4j/Aestik-Save-Editor">Source code (GitHub)</a></p>
     </div>
 
     <script src="./js/main.js"></script>

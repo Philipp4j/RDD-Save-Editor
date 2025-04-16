@@ -1,10 +1,10 @@
-## **Aestik save file editor license**
+## **RDD save file editor license**
 
 ### **Terms and Conditions**
 1. **Attribution**  
    - Any use, distribution, or modification of this project must include clear attribution to the original creator. This includes:  
      - The name of the original creator: `lilyu_`  
-     - A link to the original repository: `https://github.com/Philipp4j/Aestik-Save-Editor`
+     - A link to the original repository: `https://github.com/Philipp4j/RDD-Save-Editor`
 
 2. **Non-Commercial Use Only**  
    - This project and any derivatives may not be used for any commercial purposes. This includes, but is not limited to:  

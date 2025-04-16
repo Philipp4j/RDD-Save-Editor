@@ -1,17 +1,16 @@
-# Aestik Save File Editor
+# Roulette Dungeon Demo Save File Editor
 
->Aestik Save File Editor is a tool for encrypting and decrypting save files for the game Aestik. This project includes a fully browser based implementation of the save file editor.
+>Roulette Dungeon Demo Save File Editor (or RDD Save File Editor) is a tool for encrypting and decrypting save files for the demo of the game Roulette Dungeon. This project includes a fully browser based implementation of the save file editor.
 
 ## Features
 
-- **Encrypt/Decrypt Save Files**: Easily encrypt and decrypt your Aestik save files.
+- **Encrypt/Decrypt Save Files**: Easily encrypt and decrypt your save files.
 - **Edit Save Data**: Modify your save data directly in the browser.
-- **Secure**: All encryption and decryption is done locally in the browser. Your save file is never sent to or stored anywhere else.
 - **Drag and Drop**: Supports drag and drop for file uploads.
 
 ## Live Demo
 
-You can try out the Aestik Save File Editor at [https://lilyu.xyz/aestik](https://lilyu.xyz/aestik). Please note that this is a live demo and may not always be available.
+You can try out the Aestik Save File Editor at [https://lilyu.xyz/rdd](https://lilyu.xyz/rdd). Please note that this is a live demo and may not always be available.
 
 ## Setup Instructions
 
@@ -21,23 +20,27 @@ You can try out the Aestik Save File Editor at [https://lilyu.xyz/aestik](https:
 
 - **Web Server**: You will need a web server to host the save file editor. Apache2 is recommended, but other web servers should work as well. 
 
+- **PHP**: Make sure you have an up-to-date version of PHP installed on your server. 
+
+- **SSL Certificate**: It is highly recommended to use HTTPS for security reasons. You can obtain a free SSL certificate from [Let's Encrypt](https://letsencrypt.org/).
+
 ### Setup
 
 >This step varies depending on your currently used web server. Here is an example for apache2:
 
 1. **Move the files**:
-    Move the `aestik` folder into your web server's root directory. For apache2, this is usually `/var/www/html/`, meaning the `aestik` folder should be located at `/var/www/html/aestik`.
+    Move the `rdd` folder into your web server's root directory. For apache2, this is usually `/var/www/html/`, meaning the `rdd` folder should be located at `/var/www/html/rdd`.
 
 2. **Configure the Server**:
-    Edit the `aestik/js/main.js` file to set the current encryption key.
+    Edit the `rdd/js/main.js` file to set the current encryption key.
     ```javascript
-    const key = "47373992";
+    const key = "qpsodifguhjrkelx";
     ```
 > [!NOTE]
-> Only change the key if it has been changed by the developers of Aestik in any update. Otherwise, do not change the key.
+> Only change the key if it has been changed by the developers of the game in any update. Otherwise, do not change the key.
 
 3. **Access the Site**:
-    Open your browser and navigate to `https://yourdomain.com/aestik`. You should see the Aestik Save File Editor interface. 
+    Open your browser and navigate to `https://<domainname>/rdd`. You should see the Aestik Save File Editor interface. 
 
 ## Usage
 
@@ -58,18 +61,16 @@ You can try out the Aestik Save File Editor at [https://lilyu.xyz/aestik](https:
 5. **Import the Save File**:
     Replace the original save file with the edited save file. Make sure to back up the original save file first. You can do that by appending `.bak` to the file name or moving it to a different location.
 
-6. **Load the Save File in Aestik**:
-    Open Aestik and load the save file to see the changes you made. If the game is already running, you may need to restart it for the changes to take effect.
+6. **Load the Save File in Roulette Dungeon Demo**:
+    Open the game and load the save file to see the changes you made. If the game is already running, you may need to restart it for the changes to take effect.
 
 ## License
 
-This project is licensed under the Aestik Save File Editor License. See the `LICENSE.MD` file for details.
+This project is licensed under the RDD Save File Editor License. See the `LICENSE.MD` file for details.
+
+> [!NOTE]
+> This project is based on the Aestik Save File Editor by `lilyu_`, which you can find [here](https://github.com/Philipp4j/Aestik-Save-Editor)
 
 ## Author
 
-Created by [lilyu_](https://lilyu.xyz). This project is not affiliated with Aestik or its developers in any way.
-
-
-> [!TIP]  
-> To find the old server-based version of this project, please refer to the `archive-server` branch.
-> It is not recommended to use, as it is worse in just about every way compared to the new version.
+Created by [lilyu_](https://lilyu.xyz). This project is not affiliated with Roulette Dungeon Demo or its developers in any way.
